@@ -5,6 +5,7 @@
 ## Table of Contents
 
 1. [Props](#1-props)
+
    - [1.1 基本定义](#11-基本定义)
    - [1.2 核心概念](#12-核心概念)
    - [1.3 传递数据](#13-传递数据)
@@ -71,8 +72,8 @@ function HomePage() {
 }
 ```
 
-> 💡 在 JSX 里面，所有已`<`开头到`>`结尾的内容，都会被认定为 HTML。
-> 在 JSX 的 HTML 里面，所有已`{`开头到`}`结尾的内容，都会被认定为 JavaScript
+> 💡 在 JSX 里面，所有已 `<`开头到 `>`结尾的内容，都会被认定为 HTML。
+> 在 JSX 的 HTML 里面，所有已 `{`开头到 `}`结尾的内容，都会被认定为 JavaScript
 
 **Example**
 
@@ -120,7 +121,7 @@ function HomePage() {
 }
 ```
 
-**A**: 不好，因为不可读，不可读的原因在于，我们调用 component 方法是类似于 html tag 的调用，html 中不存在`<Welcome('Alice') />`这样的写法，从而导致 jsx 的可读性变差。
+**A**: 不好，因为不可读，不可读的原因在于，我们调用 component 方法是类似于 html tag 的调用，html 中不存在 `<Welcome('Alice') />`这样的写法，从而导致 jsx 的可读性变差。
 
 > 💡 回答问题时要围绕**黄金法则**：可读、可复用、可维护。同时 jsx 的核心概念就是可以在 javascript 中写 html，从而让我们的代码更加可读。
 
@@ -129,21 +130,18 @@ function HomePage() {
 1. 只读属性
 
    - `props` 是只读的，这意味着组件不应该修改它收到的 `props`。这有助于保持数据的一致性和可预测性。
-
 2. 使用场景
 
    - 可以使用 `props` 来传递各种数据，包括基本数据类型、对象、数组和函数
    - 在 react 中，数据是自上而下（或从父到子）流动的。父组件可以通过 `props` 将数据传递给子组件。这种单向数据流式的组件树的数据流易于理解和预测。
-
 3. 自定义组件和 `props`
 
    - 当你创建自定义组件时，你可以定义你的组件应该接受哪些 `props`，以及这些 `props` 的类型和默认值。
-
 4. 子组件使用 props
 
    - 子组件可以通过 this.props（在类组件中）或者直接作为函数参数（在函数组件中）来访问传递给它的 props
-
 5. HTML attribute 改写
+
    - class -> className
    - for -> htmlFor
    - ...
@@ -177,7 +175,7 @@ function ChildComponent(props) {
 - 子组件不能直接将 props 传回父组件。但是，父组件可以提供一个回调函数/反向数据流，作为 props 传递给子组件，子组件可以调用该函数并将数据传递回父组件。
 
 ```jsx
-// ParentComponent.jsx
+ //// ParentComponent.jsx
 function ParentComponent() {
   const [messageFromChild, setMessageFromChild] = useState('');
 
@@ -190,7 +188,7 @@ function ParentComponent() {
     <div>
       <p>Message from child: {messageFromChild}</p>
       {/* Pass the callback function as a prop to the child */}
-      <ChildComponent sendDataToParent={receiveDataFromChild} />
+      <ChildComponent sendDataToParent={receiveDataFromChild} /> // 这里的 sendDataToParent={receiveDataFromChild} 是个props. 其中的sendDataToParent是props.sendDataToParent
     </div>
   );
 }
@@ -211,7 +209,7 @@ function ChildComponent(props) {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button onClick={sendMessageToParent}>Send Message to Parent</button>
+      <button onClick={sendMessageToParent}>Send Message to Parent</button> // 这里sendMessageToParent相当于props.sendDataToParent(message), 相当于receiveDataFromChild(message), 相当于setMessageFromChild(message)
     </div>
   );
 }
@@ -278,7 +276,7 @@ function App() {
 }
 ```
 
-**Q**: 已知有下面这样一个 Hello 组件，如何实现`<p>Greeting, <strong>Alice</strong></p>`这样的结果。
+**Q**: 已知有下面这样一个 Hello 组件，如何实现 `<p>Greeting, <strong>Alice</strong></p>`这样的结果。
 
 ```jsx
 function Hello({ children }) {
@@ -306,7 +304,7 @@ function App() {
 
 ### 1.5 传递所有 props
 
-可以使用扩展运算符`...`来传递所有的 props
+可以使用扩展运算符 `...`来传递所有的 props
 
 ```jsx
 // Student.jsx
