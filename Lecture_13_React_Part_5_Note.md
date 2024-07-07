@@ -455,38 +455,41 @@ function MyComponent () {
 
 ```jsx
 function TemperatureInput({ temperature, onTemperatureChange }) {
-  function handleChange(event) {
-    onTemperatureChange(event.target.value);
+    // 套一层的原因: HTML element 事件监听给函数传入的是event. 所以要多一层来even转event.target.value.
+    function handleChange(event) {
+      onTemperatureChange(event.target.value);
+    }
+  
+    return (
+      <fieldset>
+        <legend>输入温度 (摄氏度):</legend>
+        <input 
+          value={temperature} // 受控组件的 value 由 props 传递的 temperature 决定. 这里显性赋值是为了当输入框的值变幻时(由此父组件状态更新,react会重新render), 将渲染的内容与组件内部state值一致.(看下面数据流向解析)
+          onChange={handleChange} // 当输入框值变化时调用 handleChange
+        />
+      </fieldset>
+    );
   }
-
-  return (
-    <fieldset>
-      <legend>输入温度 (摄氏度):</legend>
-      <input 
-        value={temperature} // 受控组件的 value 由 props 传递的 temperature 决定. 这里显性赋值是为了当输入框的值变幻时(由此父组件状态更新,react会重新render), 将渲染的内容与组件内部state值一致.(看下面数据流向解析)
-        onChange={handleChange} // 当输入框值变化时调用 handleChange
-      />
-    </fieldset>
-  );
-}
-
-function Calculator() {
-  const [temperature, setTemperature] = useState('');
-
-  function handleTemperatureChange(value) {
-    setTemperature(value);
+  
+  function Calculator() {
+    const [temperature, setTemperature] = useState('');
+  
+    // 这里也分装一层的原因呢: 有时候不仅仅是执行一个函数, 在此之前也要做大量的逻辑判断, 多封装一层给了更大的灵活性
+    function handleTemperatureChange(value) {
+      setTemperature(value);
+    }
+  
+    return (
+      <div>
+        <TemperatureInput 
+          temperature={temperature}
+          onTemperatureChange={handleTemperatureChange}
+        />
+        <BoilingVerdict celsius={parseFloat(temperature)} />
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <TemperatureInput 
-        temperature={temperature}
-        onTemperatureChange={handleTemperatureChange}
-      />
-      <BoilingVerdict celsius={parseFloat(temperature)} />
-    </div>
-  );
-}
+ 
 
 ```
 
