@@ -319,7 +319,7 @@ This structure separates concerns effectively:
     const creatLogger = require('/path/to/logger_with_winston')
     const logger = createLogger(__filename)
 
-    app.use(morgan)
+    app.use(morgan) // 这里就使用了自定义的morgan, which 使用了winston logger的stream, log写入到了文件.
     ```
 - [cors](https://www.npmjs.com/package/cors)
 

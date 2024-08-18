@@ -9,33 +9,36 @@
 
 ## Table of Contents
 
-1. [Spread 展开](#1-spread-展开)
-2. [Rest](#2-rest)
-3. [内置对象特性的更新 Build in Object](#3-内置对象特性的更新-build-in-object)
-   - 3.1. [模版字符串 Template String](#31-模版字符串-template-string)
-   - 3.2. [Object](#32-object)
-     - 3.2.1 [构造 Object 字面值的方法有改变](#321-构造-object-字面值的方法有改变)
-     - 3.2.2 [关于 Object 的重点 API](#322-关于-object-的重点-api)
-   - 3.3. [数组 Array](#33-数组-array)
-     - 3.3.1 [Array.from()](#331-arrayfrom)
-     - 3.3.2 [Array.of()](#332-arrayof)
-   - 3.4. [函数 Function](#34-函数-function)
-     - 3.4.1 [箭头函数 Arrow Function](#341-箭头函数-arrow-function)
-   - 3.5. [其他内置对象](#35-其他内置对象)
-4. [面向对象相关特性](#4-面向对象相关特性)
-   - 4.1. [类和构造函数](#41-类和构造函数)
-   - 4.2. [继承](#42-继承)
-   - 4.3. [super 关键字](#43-super-关键字)
-   - 4.4. [静态方法](#44-静态方法)
-   - 4.5. [getter 和 setter](#45-getter-和-setter)
-5. [模块化](#5-模块化)
-6. [新增数据结构](#6-新增数据结构)
-   - 6.1. [set 集合](#61-set-集合)
-   - 6.2. [map 映射](#62-map-映射)
-7. [迭代器](#7-迭代器)
-8. [新增 promise](#8-新增-promise)
-9. [async/await](#9-asyncawait)
-10. [装饰器 decorator)](#10-装饰器-decorator)
+- [JavaScript ES6 Part 2](#javascript-es6-part-2)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [1. spread 展开](#1-spread-展开)
+  - [2. rest](#2-rest)
+  - [3. 内置对象特性的更新 Build in Object](#3-内置对象特性的更新-build-in-object)
+    - [3.1. 模版字符串 Template String](#31-模版字符串-template-string)
+    - [3.2. Object](#32-object)
+      - [3.2.1 构造 Object 字面值的方法有改变](#321-构造-object-字面值的方法有改变)
+      - [3.2.2 关于 Object 的重点 API](#322-关于-object-的重点-api)
+    - [3.3. 数组 Array](#33-数组-array)
+      - [3.3.1 Array.from()](#331-arrayfrom)
+      - [3.3.2. Array.of()](#332-arrayof)
+    - [3.4. 函数 Function](#34-函数-function)
+      - [3.4.1. 箭头函数 Arrow Function](#341-箭头函数-arrow-function)
+    - [3.5. 其他内置对象](#35-其他内置对象)
+  - [4. 面向对象相关特性](#4-面向对象相关特性)
+    - [4.1. 类和构造函数](#41-类和构造函数)
+    - [4.2. 继承](#42-继承)
+    - [4.3. super 关键字](#43-super-关键字)
+    - [4.4. 静态方法](#44-静态方法)
+    - [4.5. getter 和 settet](#45-getter-和-settet)
+  - [5. 模块化](#5-模块化)
+  - [6. 新增数据结构](#6-新增数据结构)
+    - [6.1. Set 集合](#61-set-集合)
+    - [6.2. Map 映射](#62-map-映射)
+  - [7. 迭代器](#7-迭代器)
+  - [8. 新增 promise](#8-新增-promise)
+  - [9. async/await](#9-asyncawait)
+  - [10. 装饰器 Decorator](#10-装饰器-decorator)
 
 ## 1. spread 展开
 
@@ -330,13 +333,10 @@ console.log(newArr);
 
 箭头函数的作用域是词法作用域：
 
-1.  **词法作用域（Lexical Scope）**：箭头函数的作用域是由它定义时所在的作用域决定的，而不是调用时所在的作用域。这意味着箭头函数内部的 this、arguments、super 和 new.target 等变量的值都是继承自外层最近一层非箭头函数的作用域。
-
-2.  **没有自己的 `this`**：箭头函数内部没有自己的 `this`，它会捕获所在的执行上下文中的 `this` 值，并且无法通过 call()、apply()、bind() 等方法改变 `this` 的值。因此，在箭头函数内部使用 `this`，它指向的是定义时所在的对象，而不是调用时所在的对象。
-
-3.  **没有自己的 arguments 对象**：箭头函数内部也没有自己的 arguments 对象，它会继承所在的执行上下文中的 arguments 对象。
-
-4.  **没有 prototype 属性**：箭头函数没有 prototype 属性，因此无法通过 new 关键字来创建对象。
+1. **词法作用域（Lexical Scope）**：箭头函数的作用域是由它定义时所在的作用域决定的，而不是调用时所在的作用域。这意味着箭头函数内部的 this、arguments、super 和 new.target 等变量的值都是继承自外层最近一层非箭头函数的作用域。
+2. **没有自己的 `this`**：箭头函数内部没有自己的 `this`，它会捕获所在的执行上下文中的 `this` 值，并且无法通过 call()、apply()、bind() 等方法改变 `this` 的值。因此，在箭头函数内部使用 `this`，它指向的是定义时所在的对象，而不是调用时所在的对象。
+3. **没有自己的 arguments 对象**：箭头函数内部也没有自己的 arguments 对象，它会继承所在的执行上下文中的 arguments 对象。
+4. **没有 prototype 属性**：箭头函数没有 prototype 属性，因此无法通过 new 关键字来创建对象。
 
 > 参考 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
@@ -577,18 +577,57 @@ ES6 引入了 Promise 对象，它是一种用于异步编程的标准化方式�
 
 用法：
 
-创建 Promise：Promise 是一个表示异步操作最终完成或失败的对象。你可以通过 new Promise() 构造函数来创建一个 Promise 对象，并传入一个执行器函数作为参数，该执行器函数会立即执行，并在异步操作完成时调用 resolve 函数来表示成功，或调用 reject 函数来表示失败。
+创建 Promise：Promise 是一个表示异步操作最终完成或失败的对象。
+
+可以通过 new Promise() 构造函数来创建一个 Promise 对象，并传入一个回调函数作为参数，这个回调函数通常封装一个需要被执行的异步操作a (可能是一个定时器、一个 AJAX 请求). 并且该异步操作a中, 也会接收一个回调函数, 用于当异步操作a结束后来执行(在promise框架中, 一般会在此手动调用resolve或者reject).
+
+该异步操作a会立即执行，并在异步操作a完成时, 会执行异步操作a自己的回调函数, 一般是包括resolve或者reject,  然后promise状态由pending变成fulfilled, 并进入then链条中.
+
+    ! 需要手动将`resolve` 或 `reject` 包装在异步操作a的回调函数中，以便在操作完成时通知 `Promise` 对象。
 
 ```js
-let promise = new Promise((resolve, reject) => {
-  // 异步操作
-  setTimeout(() => {
-    // 成功时调用 resolve
-    resolve("成功");
-    // 或者失败时调用 reject
-    // reject('失败');
-  }, 1000);
+// 细节版
+const myPromise = new Promise((resolve, reject) => {// 这里是promise对象的回调函数, 封装了一个异步操作
+  // 这里声明a是一个异步操作，模拟一个网络请求 (暂时还没调用a,仅仅是声明. a会有自己的callback)
+  function a(callback) {
+    setTimeout(() => {
+      const success = true; // 假设这个操作成功了
+      if (success) {
+        callback(null, "Operation a result"); // 调用回调函数，传递结果
+      } else {
+        callback("Operation a failed", null); // 传递错误
+      }
+    }, 1000);
+  }
+
+  // 调用异步操作 a，并传入回调函数, 在此手动调用resolve reject.
+  a((error, result) => {
+    if (error) {
+      reject(error); // 如果发生错误，调用 reject
+    } else {
+      resolve(result); // 如果成功，调用 resolve 并传递结果. 会把result传给下一个then当作下一个then中result的值.
+    }
+  });
 });
+
+myPromise
+  .then((result) => {
+    console.log(result); // 输出 "Operation a result"
+  })
+  .catch((error) => {
+    console.error(error); // 如果 a 失败，会输出错误
+  });
+
+```
+
+```js
+//简洁版
+const myPromise = new Promise((resolve, reject) => {
+  // 模拟异步操作, 省去了声明, 直接调用
+  setTimeout(() => {
+    resolve("First result"); // 异步操作自己的callback. 假设异步操作成功，传递结果
+  }, 1000);
+})
 ```
 
 处理 Promise 结果：可以使用 then() 方法来处理 Promise 对象的结果。then() 方法接受两个回调函数作为参数，第一个参数用于处理成功的情况，第二个参数用于处理失败的情况。
