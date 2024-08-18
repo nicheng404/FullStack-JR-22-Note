@@ -50,7 +50,6 @@
 - `npm init`
 
   OR
-
 - `npm init -y` - automatically answers yes to all setup questions.
 
 Creating a new `package.json` file for your Node.js project. This file is essential for managing your project's dependencies, scripts, version, and other metadata.
@@ -62,7 +61,6 @@ Creating a new `package.json` file for your Node.js project. This file is essent
 - `npm install`
 
   OR
-
 - `npm i`
 
 ### 2.3 package.json and package-lock.json
@@ -293,17 +291,14 @@ route methods are functions provided by the `express` object (typically assigned
 
    - Defines a route that listens for GET requests on the specified path.
    - Used for fetching data or rendering views.
-
 2. **app.post(path, callback [, callback ...])**:
 
    - Defines a route that listens for POST requests on the specified path.
    - Used for submitting data to the server to create or update resources.
-
 3. **app.put(path, callback [, callback ...])**:
 
    - Defines a route that listens for PUT requests on the specified path.
    - Used for updating existing resources on the server.
-
 4. **app.delete(path, callback [, callback ...])**:
 
    - Defines a route that listens for DELETE requests on the specified path.
@@ -338,7 +333,7 @@ app.use([path,] callback [, callback...])
 - **path** (optional): A string, a string pattern, a regular expression, or an array of any of these, that defines the base path for which the middleware function(s) should be executed. When no path is specified, the middleware will be applied to all requests.
 
   > 💡 When you specify a path with app.use(), the middleware function will be executed for any request that starts with that path, including any subpaths.
-
+  >
 - **callback**: A middleware function or an array of middleware functions.
 
 **Middleware Functions**
@@ -364,7 +359,6 @@ In Express.js, you can get data from a request in several ways depending on wher
      console.log('Server is running on port 3000');
    });
    ```
-
 2. Query Parameters
 
    ```js
@@ -380,7 +374,6 @@ In Express.js, you can get data from a request in several ways depending on wher
      console.log('Server is running on port 3000');
    });
    ```
-
 3. Request Body
 
    ```js
@@ -412,12 +405,12 @@ Express is a routing and middleware web framework that has minimal functionality
   - if the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
   ![node_express_middleware2](./assets/images/node_express_middleware2.jpg)
-
 - Node.js backend is a series of middleware function calls
   ![node_express_middleware_series](./assets/images/node_express_middleware_series.jpg)
 - error handling
   ![node_express_middlewrea_error_handling](./assets/images/node_express_middlewrea_error_handling.jpg)
 - path not found
+
   - If next() is called, but the next middleware does not exist:
     - It defaults to the Express behavior of entering the "404 Page Not Found" route.
     - During development, it can be managed or left unhandled as desired.

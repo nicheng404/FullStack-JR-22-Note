@@ -4,11 +4,13 @@
 
 ## Table of Contents
 
-1. [CORS](#1-cors)
-2. [Router](#2-router)
-3. [Application Structure](#3-application-structure)
-4. [Error Handling](#4-error-handling)
-5. [Third-party Package](#5-third-party-package)
+- [Lecture 17 Node Part 4](#lecture-17-node-part-4)
+  - [Table of Contents](#table-of-contents)
+  - [1. CORS](#1-cors)
+  - [2. Router](#2-router)
+  - [3. Application Structure](#3-application-structure)
+  - [4. Error Handling](#4-error-handling)
+  - [5. Third-party Package](#5-third-party-package)
 
 ## 1. CORS
 
@@ -93,30 +95,24 @@ app.use(router);
 
   - `package.json`: Contains metadata about the project and dependencies.
   - `package-lock.json`: Contains the locked versions of dependencies for consistency.
-
 - `src/` Directory
 
   - `index.js` (or `app.js` or `server.js`): The main entry point of your application where you initialize and start your server.
-
 - `routes/` Directory
 
   - `users.js` (or `users.router.js`): Handles routing for user-related endpoints.
   - `tasks.js`: Handles routing for task-related endpoints.
-
 - `controllers/` Directory
 
   - `user.js` (or `user.controller.js`): Contains the logic for user-related operations.
   - `task.js`: Contains the logic for task-related operations.
-
 - `models/` Directory
 
   - `user.js` (or `User.js`, `user.model.js`): Defines the User model and its CRUD operations.
   - `task.js`: Defines the Task model and its CRUD operations.
-
 - `middleware` Directory
 
   - This directory contains middleware functions to process requests.
-
 - `utils/` Directory
 
   - This directory contains utility and helper functions, as well as configurations like database connections.
@@ -166,7 +162,6 @@ This structure separates concerns effectively:
 
    module.exports = NotFoundException;
    ```
-
 2. Error-handling middleware function
 
    This middleware will be used to detect whether the thrown error is a NotFoundException. If it is, return 404...
@@ -184,7 +179,6 @@ This structure separates concerns effectively:
        next(err); // Passes the error to the error-handling middleware
    };
    ```
-
 3. Use middleware function
 
    ```js
@@ -201,11 +195,9 @@ This structure separates concerns effectively:
 - [Helmet](https://www.npmjs.com/package/helmet)
 
   - securing Express/Connect apps with various HTTP headers
-
 - [dotenv](https://www.npmjs.com/package/dotenv)
 
   - Used to manage environment variables
-
 - [morgan](https://www.npmjs.com/package/morgan)
 
   - Used for HTTP request logger
@@ -214,13 +206,11 @@ This structure separates concerns effectively:
     - `dev` - commonly used for dev environment
     - `tiny` - more concise than `dev`
     - `combined`
-
   - Dynamically choose the logging format based on the environment variable
 
     ```js
     app. use(morgan(process.env NODE_ENV === 'dev' ? 'tiny' : 'combined'));|
     ```
-
 - [winston](https://www.npmjs.com/package/winston)
 
   - logging library, used to create and manage log messages with different levels of severity, formats, and transports.
@@ -229,7 +219,6 @@ This structure separates concerns effectively:
     |-- utils/
         |-- logger.js
     ```
-
     ```js
     const winston = require('winston');
 
@@ -239,10 +228,11 @@ This structure separates concerns effectively:
         new winston.transports.File({ filename: 'combined.log' }), // 创建日志文件
       ],
     });
-    ```
 
+    module.export = logger // 给出一个logger对象, 可以直接用. const logger = require('...'); logger.info('.....')
+    ```
     ```js
-    const winston = require('winston');
+     const winston = require('winston');
 
     // filename -> __filename
     const createLogger = (filename) => {
@@ -261,8 +251,9 @@ This structure separates concerns effectively:
       });
       return logger;
     };
-    ```
 
+    module.export = creatLogger // 给出的是一个function, 仍需const creatLogger = require('...'); const logger = createLogger() 才能得到logger对象
+    ```
   - Integrate `morgen` with `winston`
 
     ```txt
@@ -270,7 +261,6 @@ This structure separates concerns effectively:
         |-- morgan.js
         |-- logger.js
     ```
-
     ```js
     // morgan.js
     const morgan = require('morgan');
@@ -280,11 +270,10 @@ This structure separates concerns effectively:
     module.exports = morgan(
       process.env.NODE_ENV === 'dev' ? 'tiny' : 'combined',
       {
-        stream: logger.stream,
+        stream: logger.stream, // 走winston 设置好的stream
       }
     );
     ```
-
     ```js
     // logger.js
     const winston = require('winston');
@@ -314,7 +303,7 @@ This structure separates concerns effectively:
         ],
       });
 
-      logger.stream = {
+      logger.stream = { // 在和morgan绑定的时候, 给winston一个设定好的stream 来让mogan触发
         write: (message) => {
           logger.info(message);
         },
@@ -324,8 +313,16 @@ This structure separates concerns effectively:
 
     module.exports = createLogger;
     ```
+    ```js
+    //index.js 换成自己定义的morgan
+    const morgan = require('/path/to/customized/morgan')
+    const creatLogger = require('/path/to/logger_with_winston')
+    const logger = createLogger(__filename)
 
+    app.use(morgan)
+    ```
 - [cors](https://www.npmjs.com/package/cors)
+
   - Used to enable Cross-Origin Resource Sharing (CORS)
 - Swagger
 
